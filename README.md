@@ -1,6 +1,6 @@
 # JobConect
 
-Um parágrafo da descrição do projeto vai aqui
+
 Sistema em Django de vagas de emprego para o processo seletivo da JobConvo
 Tela de vagas com número de candidatos, ser possível acessar quais candidatos (todos os dados) estão na vaga, Considere que a empresa tem o poder de editar ou deletar as vagas.
 
