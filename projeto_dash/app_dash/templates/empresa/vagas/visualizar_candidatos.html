@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="container">
+        <h1 class="display-4">Visualizar Candidatos para a Vaga: {{ vaga.nome }}</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Pretensão Salarial</th>
+                    <th>Experiência</th>
+                    <th>Escolaridade</th>
+                    <th>Faixa Salarial</th>
+                    <th>Escolaridade</th>
+                    <th>Pontuação Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidato in candidatos %}
+                <tr>
+                    <td>{{ candidato.user.username }}</td>
+                    <td>{{ candidato.get_pretensao_salarial_display }}</td>
+                    <td>{{ candidato.get_experiencia_display }}</td>
+                    <td>{{ candidato.get_escolaridade_display }}</td>
+                    <td>{{ candidato.pontuacao_faixa_salarial }}</td>
+                    <td>{{ candidato.pontuacao_escolaridade }} </td>
+                    <td>{{ candidato.pontuacao_total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'pagina_apos_cadastro_empresa' %}" class="btn btn-primary">Voltar para a home</a>
+    </div>
+    
+    {% endblock %}

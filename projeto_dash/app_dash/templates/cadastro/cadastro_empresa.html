@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container text-center col-4">
+    <h1 class="display-4">Cadastro Empresa</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+            <input type="text" id="username" name="username" class="form-control" required>
+            <label for="username">E-mail:</label>
+        </div>
+    
+        <div class="form-floating mb-3">
+            <input type="password" id="password1" name="password1" class="form-control" required placeholder="Digite sua senha">
+            <label for="password1">Senha:</label>
+        </div>
+    
+        <div class="form-floating mb-3">
+            <input type="password" id="password2" name="password2" class="form-control" required placeholder="Digite sua senha">
+            <label for="password2">Confirme a senha:</label>
+        </div>
+    
+        <div class="form-floating mb-3">
+            <input type="text" id="nome_empresa" name="nome_empresa" class="form-control" required placeholder="Digite o nome da empresa">
+            <label for="nome_empresa">Nome da Empresa:</label>
+        </div>
+    
+        <div class="form-floating mb-3">
+            <input type="text" id="cnpj" name="cnpj" class="form-control" required placeholder="Digite o CNPJ da empresa">
+            <label for="cnpj">CNPJ:</label>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+    
+    
+
+    <p>Já tem uma conta? <a href="{% url 'login_empresa' %}">Faça login aqui</a>.</p>
+</div>
+    {% endblock %}

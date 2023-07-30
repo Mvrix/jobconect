@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <h1 class="display-4">Bem-vindo!</h1>
+    <p class="lead">{{ request.user.username }}</p>
+    <a href="{% url 'logout' %}" class="btn btn-secondary">Sair</a>
+
+    <h2 class="display-6">Lista de vagas disponíveis</h2>
+    <ul class="list-group">
+        {% for vaga in vagas %}
+            {% if not vaga in vagas_candidatadas %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ vaga.nome }} - {{ vaga.get_faixa_salarial_display }} - {{ vaga.requisitos }}
+                    <a href="{% url 'candidatar_vaga' vaga.id %}" class="btn btn-primary">Candidatar-se</a>
+                </li>
+            {% endif %}
+        {% empty %}
+            <li class="list-group-item">Nenhuma vaga cadastrada pela empresa.</li>
+        {% endfor %}
+    </ul>
+
+    <h2 class="display-6">Suas candidaturas</h2>
+    {% if vagas_candidatadas %}
+        <ul class="list-group list-group-flush">
+            {% for candidatura in vagas_candidatadas %}
+                <li class="list-group-item">
+                    Candidatou-se à vaga: {{ candidatura.vaga.nome }}
+                    <ul class="list-group">
+                        <li class="list-group-item">Pretensão salarial: {{ candidatura.get_pretensao_salarial_display }}</li>
+                        <li class="list-group-item">Experiência: {{ candidatura.get_experiencia_display }} </li>
+                        <li class="list-group-item">Escolaridade: {{ candidatura.get_escolaridade_display }}</li>
+                    </ul>
+                    {% if not candidatura.desistiu %}
+                        <form method="post" action="{% url 'desistir_vaga' candidatura.id %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Desistir" class="btn btn-danger">
+                        </form>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Você ainda não se candidatou a nenhuma vaga.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

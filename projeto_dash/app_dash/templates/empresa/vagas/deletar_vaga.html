@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <h1 class="display-4">Deletar Vaga: {{ vaga.nome }}</h1>
+    <p>Você está prestes a deletar a vaga "<strong>{{ vaga.nome }}</strong>". Tem certeza de que deseja continuar?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sim, Deletar Vaga</button>
+    </form>
+
+    <a href="{% url 'pagina_apos_cadastro_empresa' %}" class="btn btn-secondary">Voltar para a home</a>
+</div>
+{% endblock %}
+

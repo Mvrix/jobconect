@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container text-center col-4">
+    <h1 class="display-4">Login empresa</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+            <input type="text" id="username" name="username" class="form-control" placeholder="Digite seu e-mail"required>
+            <label for="username">E-mail:</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha"required required>
+            <label for="password">Senha:</label>
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">Entrar</button>
+    </form>
+
+    <p>Ainda não tem uma conta? <a href="{% url 'cadastro_empresa' %}">Cadastre-se aqui</a>.</p>
+    <p>Usuário? <a href="{% url 'cadastro_candidato' %}">Clique aqui</a> para cadastrar-se.</p>
+</div>
+{% endblock %}

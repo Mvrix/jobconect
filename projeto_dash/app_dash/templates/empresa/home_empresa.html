@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <h1 class="display-4">Bem-vindo!</h1>
+    <p class="lead">Nome da Empresa: {{ empresa.nome_empresa }}</p>
+    <p class="lead">CNPJ: {{ empresa.cnpj }}</p>
+    
+    <a href="{% url 'logout' %}" class="btn btn-secondary">Sair</a>
+    <a href="{% url 'nova_vaga' %}" class="btn btn-primary">Criar nova vaga</a>
+    <a href="{% url 'lista_vagas' %}" class="btn btn-primary">Ir para a lista de Vagas</a>
+
+    <h2 class="mt-5">Lista de vagas</h2>
+    <ul class="list-group">
+        {% for vaga in vagas %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ vaga.nome }} - {{ vaga.get_faixa_salarial_display }}
+                <div>
+                    <a href="{% url 'visualizar_candidatos' vaga.id %}" class="btn btn-info">Visualizar Candidatos</a>
+                    <a href="{% url 'editar_vaga' vaga.id %}" class="btn btn-warning">Editar vaga</a>
+                    <a href="{% url 'deletar_vaga' vaga.id %}" class="btn btn-danger">Deletar vaga</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="lead">Vagas criadas por mês</h3>
+            <canvas id="vagasPorMesChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <h3 class="lead">Candidatos recebidos por mês</h3>
+            <canvas id="candidatosPorMesChart"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("{% url 'vagas_criadas_por_mes' %}")
+            .then(response => response.json())
+            .then(data => {
+                var meses = data.map(item => item.mes);
+                var vagasCriadas = data.map(item => item.count);
+
+                var ctx1 = document.getElementById('vagasPorMesChart').getContext('2d');
+                new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: meses,
+                        datasets: [{
+                            label: 'Vagas Criadas por Mês',
+                            data: vagasCriadas,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        animations: {
+                            tension: {
+                                duration: 1000,
+                                easing: 'linear',
+                                from: 1,
+                                to: 0,
+                                loop: true
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+
+        fetch("{% url 'candidatos_recebidos_por_mes' %}")
+            .then(response => response.json())
+            .then(data => {
+                var meses = data.map(item => item.mes);
+                var candidatosRecebidos = data.map(item => item.count);
+
+                var ctx2 = document.getElementById('candidatosPorMesChart').getContext('2d');
+                new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: meses,
+                        datasets: [{
+                            label: 'Candidatos Recebidos por Mês',
+                            data: candidatosRecebidos,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        animations: {
+                            tension: {
+                                duration: 1000,
+                                easing: 'linear',
+                                from: 1,
+                                to: 0,
+                                loop: true
+                            }
+                        },
+                        
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                        
+                    }
+                });
+            });
+    });
+</script>
+
+
+    {% endblock %}
+
+    

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome da Vaga:</label>
+            <input type="text" id="nome" name="nome" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="faixa_salarial" class="form-label">Faixa Salarial:</label>
+            <select id="faixa_salarial" name="faixa_salarial" class="form-select" required>
+                <option value="1">Até 1.000</option>
+                <option value="2">De 1.000 a 2.000</option>
+                <option value="3">De 2.000 a 3.000</option>
+                <option value="4">Acima de 3.000</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="requisitos" class="form-label">Requisitos:</label>
+            <textarea id="requisitos" name="requisitos" class="form-control" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="escolaridade_minima" class="form-label">Escolaridade Mínima:</label>
+            <select id="escolaridade_minima" name="escolaridade_minima" class="form-select" required>
+                <option value="EF">Ensino Fundamental</option>
+                <option value="EM">Ensino Médio</option>
+                <option value="TEC">Tecnólogo</option>
+                <option value="ES">Ensino Superior</option>
+                <option value="POS">Pós / MBA / Mestrado</option>
+                <option value="DOUT">Doutorado</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Criar Vaga</button>
+    </form>
+
+    <a href="{% url 'pagina_apos_cadastro_empresa' %}" class="btn btn-secondary">Voltar para a home</a>
+</div>
+{% endblock %}

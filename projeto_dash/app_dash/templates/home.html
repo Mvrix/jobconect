@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="grid text-center ">
+    <h1 class="display-3">Bem-vindo(a) ao JobConnect!</h1>
+    <a href="{% url 'login_empresa' %}" type="button" class="btn btn-outline-dark">Login Empresa</a>
+    <a href="{% url 'login_candidato' %}" type="button" class="btn btn-outline-dark">Login Candidato</a>
+</div>
+{% endblock %}

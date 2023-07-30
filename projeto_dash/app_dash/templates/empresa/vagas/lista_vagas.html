@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <h1 class="display-4">Lista de Vagas</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome da Vaga</th>
+                <th>Faixa Salarial</th>
+                <th>Escolaridade Mínima</th>
+                <th>Número de Candidatos</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vaga in vagas %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ vaga.nome }}</td>
+                <td>{{ vaga.get_faixa_salarial_display }}</td>
+                <td>{{ vaga.get_escolaridade_minima_display }}</td>
+                <td>{{ vaga.candidatos.count }}</td>
+                <td>
+                    <a href="{% url 'visualizar_candidatos' vaga.id %}" class="btn btn-primary">Visualizar Candidatos</a>
+                    <a href="{% url 'editar_vaga' vaga.id %}" class="btn btn-secondary">Editar</a>
+                    <a href="{% url 'deletar_vaga' vaga.id %}" class="btn btn-danger">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'nova_vaga' %}" class="btn btn-success">Criar Nova Vaga</a>
+    <a href="{% url 'pagina_apos_cadastro_empresa' %}" class="btn btn-secondary">Voltar para a home</a>
+</div>
+
+    {% endblock %}

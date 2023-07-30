@@ -1,0 +1,9 @@
+Todos usuarios estão com a mesma senha: 1234
+
+Logins candidato:
+oi_mario@live.com
+aero.mjr@gmail.com
+slaurindo@gmail.com
+
+Login empresa: 
+empresa@gmail.com
