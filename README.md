@@ -126,13 +126,12 @@ Mencione as ferramentas que você usou para criar seu projeto
 @Mvrix - Me - https://www.linkedin.com/in/mvrix/
 
 * **Mvrix** - *Meu portifolio completo* - [Mario](https://github.com/mvrix)
-* **Fulano De Tal** - *Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
 
 ## 📄 Licença
 
 Este projeto está sob a licença Django codigo aberto - veja o arquivo [LICENSE.md](https://docs.djangoproject.com/pt-br/4.2/faq/general/) para detalhes.
 
-## 🎁 Expressões de gratidão
+## 🎁 Expressões de gratidão!
 
 * Foi um aprendizado muito rapido e muito fluido, amei cada dia de trabalho 📢;
 * A organização foi feita através de um Kanban que fiz no Trello para não me perder ao longo do processo;
