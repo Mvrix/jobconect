@@ -1,101 +1,143 @@
-# jobconect
-Sistema em Django de vagas de emprego para o processo seletivo JobConvo
-# Título do projeto
+# JobConect
 
-Um parágrafo da descrição do projeto vai aqui
+
+Sistema em Django de vagas de emprego para o processo seletivo da JobConvo
+Tela de vagas com número de candidatos, ser possível acessar quais candidatos (todos os dados) estão na vaga, Considere que a empresa tem o poder de editar ou deletar as vagas.
+
+Bônus 1 (não obrigatório): conseguir pontuar quais candidatos estão dentro do perfil da vaga (faixa salarial + escolaridade). Ex:
+Candidatos = 0 pontos
+Se dentro da faixa salarial, adiciona 1 ponto
+Se dentro ou acima da escolaridade, adiciona 1 ponto
+Bônus 2 (não obrigatório): Tela para relatório: implantar o Charts js(ou semelhante) gerando os seguintes gráficos:
+Vagas criadas por mês
+Candidatos recebidos por mês
 
 ## 🚀 Começando
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
-
-Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar o projeto.
 
 ### 📋 Pré-requisitos
 
 De que coisas você precisa para instalar o software e como instalá-lo?
 
 ```
-Dar exemplos
+VsCode ou outra IDE que suporte arquivos Python
 ```
 
 ### 🔧 Instalação
 
-Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
-
-Diga como essa etapa será:
+Autalmente o sistema já está com um banco de dados com informações, mas caso queria criar um banco sem nenhum dado e sem dependencias, aqui está como fazer:
 
 ```
-Dar exemplos
+cd projeto_dash
+
+pip install -r requirements.txt
+
+python ./manage.py  makemigrations
+
+python ./manage.py migrate
 ```
 
-E repita:
+Caso altere o arquivo Models.py precisará realizar a atualização do banco dessa forma:
 
 ```
-Até finalizar
+python ./manage.py  makemigrations
+
+python ./manage.py migrate
 ```
 
-Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
 
-## ⚙️ Executando os testes
+## ⚙️ Descrição das funções para entendimento da logica do sistema
 
-Explicar como executar os testes automatizados para este sistema.
+Função: home(request)
+        Feature: Página inicial
+            Cenário: Acessar a página inicial
+                Dado que o usuário acessa o site
+                Quando ele não especifica nenhuma URL
+                Então a página inicial é exibida
 
-### 🔩 Analise os testes de ponta a ponta
+Função: lista_vagas(request)
+    Feature: Listagem de vagas
+        Cenário: Visualizar a lista de vagas
+            Dado que existem vagas cadastradas
+            Quando o usuário acessa a página de listagem de vagas
+            Então todas as vagas são mostradas para o usuário
 
-Explique que eles verificam esses testes e porquê.
+Função: visualizar_candidatos(request, vaga_id)
+    Feature: Visualizar candidatos de uma vaga
+        Cenário: Acessar a lista de candidatos de uma vaga
+            Dado que existem candidatos para uma vaga
+            Quando o usuário acessa a página de visualização de candidatos para essa vaga
+            Então todos os candidatos são mostrados para o usuário
 
-```
-Dar exemplos
-```
+Função: deletar_vaga(request, vaga_id)
+    Feature: Deletar vaga
+        Cenário: Deletar uma vaga existente
+            Dado que existe uma vaga
+            Quando o usuário solicita para deletar essa vaga
+            Então a vaga é deletada e o usuário é redirecionado para a lista de vagas
 
-### ⌨️ E testes de estilo de codificação
+Função: login_empresa(request)
+    Feature: Login de empresa
+        Cenário: Fazer login como empresa
+            Dado que a empresa está registrada no sistema
+            Quando a empresa fornece seu nome de usuário e senha corretos
+            Então a empresa é logada e redirecionada para a página após o cadastro
 
-Explique que eles verificam esses testes e porquê.
+Função: login_candidato(request)
+    Feature: Login de candidato
+        Cenário: Fazer login como candidato
+            Dado que o candidato está registrado no sistema
+            Quando o candidato fornece seu nome de usuário e senha corretos
+            Então o candidato é logado e redirecionado para a página após o cadastro
+            
+Função: cadastro_candidato_view(request)
+        Feature: Cadastro de candidato
+            Cenário: Registrar um novo candidato
+                Dado que o candidato não está registrado
+                Quando o candidato fornece informações válidas de registro
+                Então o candidato é registrado e redirecionado para a página de login de candidato
 
-```
-Dar exemplos
-```
+Função: cadastro_empresa_view(request)
+    Feature: Cadastro de empresa
+        Cenário: Registrar uma nova empresa
+            Dado que a empresa não está registrada
+            Quando a empresa fornece informações válidas de registro
+            Então a empresa é registrada e redirecionada para a página de login de empresa
 
-## 📦 Implantação
-
-Adicione notas adicionais sobre como implantar isso em um sistema ativo
+Função: custom_logout(request)
+    Feature: Logout
+        Cenário: Logout de um usuário logado
+            Dado que o usuário está logado
+            Quando o usuário solicita para fazer logout
 
 ## 🛠️ Construído com
 
 Mencione as ferramentas que você usou para criar seu projeto
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
-* [Maven](https://maven.apache.org/) - Gerente de Dependência
-* [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
-
-## 🖇️ Colaborando
-
-Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoSobreContribuicoes) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
-
-## 📌 Versão
-
-Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/suas/tags/do/projeto). 
+* [Django](https://docs.djangoproject.com/en/4.2/) - O framework web usado
+* [Python](https://docs.python.org/3/) - Gerente de Dependência
+* [SQLite3](https://www.sqlite.org/docs.html) - Banco de dados
+* [Chartsjs](https://www.chartjs.org/docs/latest/) - Graficos
+* [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) - Framework para estilização Web
 
 ## ✒️ Autores
 
-Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
+@Mvrix - Me - https://www.linkedin.com/in/mvrix/
 
-* **Um desenvolvedor** - *Trabalho Inicial* - [umdesenvolvedor](https://github.com/linkParaPerfil)
-* **Fulano De Tal** - *Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
-
-Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
+* **Mvrix** - *Meu portifolio completo* - [Mario](https://github.com/mvrix)
 
 ## 📄 Licença
 
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
+Este projeto está sob a licença Django codigo aberto - veja o arquivo [LICENSE.md](https://docs.djangoproject.com/pt-br/4.2/faq/general/) para detalhes.
 
-## 🎁 Expressões de gratidão
+## 🎁 Expressões de gratidão!
 
-* Conte a outras pessoas sobre este projeto 📢;
-* Convide alguém da equipe para uma cerveja 🍺;
-* Um agradecimento publicamente 🫂;
-* etc.
+* Foi um aprendizado muito rapido e muito fluido, amei cada dia de trabalho 📢;
+* A organização foi feita através de um Kanban que fiz no Trello para não me perder ao longo do processo;
+* Agradeço imensamente a JobConvo pela oportunidade e que eu atinja as expectativas 🫂;
+
 
 
 ---
-⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
+⌨️ com ❤️ por [Mario](https://github.com/mvrix) 😊
