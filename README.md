@@ -26,10 +26,12 @@ VsCode ou outra IDE que suporte arquivos Python
 
 ### 🔧 Instalação
 
-Autalmente o sistema já está com um banco de dados com informações, mas caso queria criar um banco sem nenhum dado, aqui está como fazer:
+Autalmente o sistema já está com um banco de dados com informações, mas caso queria criar um banco sem nenhum dado e sem dependencias, aqui está como fazer:
 
 ```
 cd projeto_dash
+
+pip install -r requirements.txt
 
 python ./manage.py  makemigrations
 
